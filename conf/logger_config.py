@@ -5,7 +5,7 @@
 # @function :logger
 
 
-from keras_textclassification.conf.path_config import path_root
+from conf.path_config import path_root
 from logging.handlers import RotatingFileHandler
 import logging
 import time

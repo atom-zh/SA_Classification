@@ -5,11 +5,7 @@
 # @function:
 
 
-from keras_textclassification.data_preprocess.text_preprocess import load_json, save_json, txt_read
-from keras_textclassification.conf.path_config import path_model_dir
-from keras_textclassification.conf.path_config import path_baidu_qa_2019_train, path_baidu_qa_2019_valid, path_root
-from tqdm import tqdm
-import pandas as pd
+from data_preprocess.text_preprocess import load_json, save_json
 import numpy as np
 import json
 import os
@@ -22,7 +18,7 @@ class PreprocessGenerator:
     def __init__(self, path_model_dir):
         self.l2i_i2l = None
         self.path_fast_text_model_vocab2index = path_model_dir + 'vocab2index.json'
-        self.path_fast_text_model_l2i_i2l = path_model_dir + 'l2i_i2l.json'
+        self.path_fast_text_model_l2i_i2l = path_l2i_i2l
         if os.path.exists(self.path_fast_text_model_l2i_i2l):
             self.l2i_i2l = load_json(self.path_fast_text_model_l2i_i2l)
 
@@ -143,7 +139,7 @@ class PreprocessSimGenerator:
     def __init__(self, path_model_dir):
         self.l2i_i2l = None
         self.path_fast_text_model_vocab2index = path_model_dir + 'vocab2index.json'
-        self.path_fast_text_model_l2i_i2l = path_model_dir + 'l2i_i2l.json'
+        self.path_fast_text_model_l2i_i2l = path_l2i_i2l
         if os.path.exists(self.path_fast_text_model_l2i_i2l):
             self.l2i_i2l = load_json(self.path_fast_text_model_l2i_i2l)
 

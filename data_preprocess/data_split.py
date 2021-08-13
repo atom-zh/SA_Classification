@@ -9,15 +9,14 @@
 import pathlib
 import sys
 import os
-project_path = str(pathlib.Path(os.path.abspath(__file__)).parent.parent.parent)
-sys.path.append(project_path)
 from sklearn.model_selection import StratifiedKFold
 import pandas as pd
 import numpy as np
 import random
+from data_preprocess.text_preprocess import txt_write, txt_read
 
-from keras_textclassification.data_preprocess.text_preprocess import txt_write, txt_read
-
+project_path = str(pathlib.Path(os.path.abspath(__file__)).parent.parent.parent)
+sys.path.append(project_path)
 
 def data_kfold(path_org_data, k_fold_split=10, path_save_dir=""):
     """
@@ -123,7 +122,7 @@ def data_split_train_val_label(path_org_data, path_save_dir, count_num=500000, u
 
 if __name__ == '__main__':
 
-    from keras_textclassification.conf.path_config import path_root
+    from conf.path_config import path_root
     filepath = path_root + "/data/baidu_qa_2019/baike_qa_train.csv" # 原始语料
     k_fold_split = 10
     data_kfold(path_org_data=filepath, k_fold_split=10, path_save_dir=path_root+ "/data/baidu_qa_2019/")
