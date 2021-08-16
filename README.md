@@ -23,7 +23,7 @@ Multi Label Classification of short Texts of Science Association
 - Data set preprocessing  
 `out/data/multi_label`
 ---
-##参考/感谢 (Thanks)
+## 参考/感谢 (Thanks)
 * [yongzhuo:Keras-TextClassification](https://github.com/yongzhuo/Keras-TextClassification)
 * [Convolutional Neural Networks for Sentence Classiﬁcation](https://arxiv.org/abs/1408.5882)
 * [A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional Neural Networks for Sentence Classification](https://arxiv.org/abs/1510.03820)
