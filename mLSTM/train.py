@@ -37,7 +37,8 @@ def train(hyper_parameters=None, rate=1.0):
     if not hyper_parameters:
         hyper_parameters = {
         'train_name':'LSTM',
-        'train_mode':'Bi_cnn', # non, Si, Si_cnn, Si_attention, Si_attention_cnn, Bi, Bi_cnn, Bi_attention, Bi_attention_cnn
+        'train_mode':'Si_attention_before_cnn',
+        # non, Si, Si_cnn, Si_attention_before, Si_attention_before_cnn, Bi, Bi_cnn, Bi_attention_befor, Bi_attention_after, Bi_attention_befor_cnn, Bi_attention_after_cnn
         'train_time': None,
         'path_train_out': 'None',
         'len_max': 60,  # 句子最大长度, 固定 推荐20-50
@@ -55,7 +56,7 @@ def train(hyper_parameters=None, rate=1.0):
                   'dropout': 0.2,  # 随机失活, 概率
                   'decay_step': 100,  # 学习率衰减step, 每N个step衰减一次
                   'decay_rate': 0.9,  # 学习率衰减系数, 乘法
-                  'epochs': 1,  # 训练最大轮次
+                  'epochs': 200,  # 训练最大轮次
                   'patience': 3, # 早停,2-3就好
                   'lr': 5e-4,  # 学习率, 对训练会有比较大的影响, 如果准确率一直上不去,可以考虑调这个参数
                   'l2': 1e-9,  # l2正则化

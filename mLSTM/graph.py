@@ -50,10 +50,13 @@ class LSTMGraph(graph):
                                     recurrent_regularizer=regularizers.l2(0.32),
                                     go_backwards = False)(embedding_output)
 
-        if "attention" in self.train_mode:
+        if "attention_befor" in self.train_mode:
             attention_out = Attention()(embedding_output)
             # 拼接
             x_feb = Concatenate(axis=2)([x_fordwords, embedding_output, x_backwords_reverse, attention_out])
+        elif "attention_after" in self.train_mode:
+            x_feb = Concatenate(axis=2)([x_fordwords, embedding_output, x_backwords_reverse])
+            x_feb = Attention()(x_feb)
         else:
             x_feb = Concatenate(axis=2)([x_fordwords, embedding_output, x_backwords_reverse])
 
