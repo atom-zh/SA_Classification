@@ -38,7 +38,7 @@ def train(hyper_parameters=None, rate=1.0):
         hyper_parameters = {
         'train_name':'LSTM',
         'train_mode':'Si_attention_before_cnn',
-        # non, Si, Si_cnn, Si_attention_before, Si_attention_before_cnn, Bi, Bi_cnn, Bi_attention_befor, Bi_attention_after, Bi_attention_befor_cnn, Bi_attention_after_cnn
+        # non, Si, Si_cnn, Si_attention_before, Si_attention_before_cnn, Bi, Bi_cnn, Bi_attention_befor, Bi_attention_after, Bi_attention_befor_cnn, Bi_attention_after_cnn, LM
         'train_time': None,
         'path_train_out': 'None',
         'len_max': 60,  # 句子最大长度, 固定 推荐20-50

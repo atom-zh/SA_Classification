@@ -3,8 +3,7 @@
 # @time     :2019/6/3 10:51
 # @author   :Mo
 # @function :graph of base
-
-
+import tensorflow
 from keras.layers import Reshape, Concatenate, Conv2D, MaxPool2D
 from keras.layers import Dense, Dropout, Flatten
 from keras.models import Model
@@ -31,6 +30,13 @@ class TextCNNGraph(graph):
         """
         super().create_model(hyper_parameters)
         embedding = self.word_embedding.output
+
+        """ Lable Mutual """
+        if self.train_mode == 'LM':
+            inputs = K.expand_dims(self.word_embedding.input, axis=1)
+            inputs = K.tile(inputs, [1, self.embed_size, 1])
+            inputs = K.cast(inputs, tensorflow.float32)
+            LableMutual = K.batch_dot(inputs, embedding)
 
         # attention start
         if self.train_mode == 'attention':
@@ -61,6 +67,10 @@ class TextCNNGraph(graph):
 
         if self.train_mode == 'attention':
             conv_pools.append(atten) # add attention
+
+        if self.train_mode == 'LM':
+            conv_pools.append(LableMutual) # add LableMutual
+
         # 拼接
         x = Concatenate(axis=-1)(conv_pools)
         x = Dropout(self.dropout)(x)

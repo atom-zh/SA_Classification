@@ -7,6 +7,7 @@
 
 from __future__ import print_function, division
 
+import tensorflow
 from keras.layers import Conv1D, Conv2D, MaxPooling2D, Dense, Lambda
 from keras.layers import Dropout, Reshape, Concatenate
 from keras.layers import LSTM
@@ -36,6 +37,14 @@ class LSTMGraph(graph):
         """
         super().create_model(hyper_parameters)
         embedding_output = self.word_embedding.output
+
+        """ Lable Mutual """
+        if self.train_mode == 'LM':
+            inputs = K.expand_dims(self.word_embedding.input, axis=1)
+            inputs = K.tile(inputs, [1, self.embed_size, 1])
+            inputs = K.cast(inputs, tensorflow.float32)
+            LableMutual = K.batch_dot(inputs, embedding_output)
+
         # 反向
         x_backwords = LSTM(units=self.rnn_units,
                                     return_sequences=True,
@@ -80,6 +89,10 @@ class LSTMGraph(graph):
                                    padding = 'valid',
                                    )(conv)
                 conv_pools.append(pooled)
+
+            if self.train_mode == 'LM':
+                conv_pools.append(LableMutual)  # add LableMutual
+
             # 拼接
             x = Concatenate()(conv_pools)
             x = Dropout(self.dropout)(x)
